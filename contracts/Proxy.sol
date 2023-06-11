@@ -17,6 +17,10 @@ import "./StorageSlot.sol";
     it will change the 0x0 storage of Proxy contract as it stores the value in storage slot of the implemented contract variable's
     storage slot.
 
+    Here even if in first implementation's 0x0 has a uint type and in second implementation's 0x0 has address type, it will allocate 
+    same storage slot regardless of the datatype like, let say first Proxy's 0x0 had a uint type value and if you change it to an address
+    by doing it using second implementation, it's 0x0 will have value of address type.
+
     refer:- https://docs.openzeppelin.com/upgrades-plugins/1.x/proxies#proxy-forwarding for more...
 */
 
@@ -43,9 +47,9 @@ contract implementation1 {
 }
 
 contract implementation2 {
-    uint y;
+    address y;
 
-    function changeY(uint _y) external {
+    function changeY(address _y) external {
         y = _y;
     }
 }

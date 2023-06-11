@@ -34,12 +34,12 @@ describe("Lock", function () {
       
       await proxy.changeImplementation(impl2.address);
 
-      await proxyImpl2.changeY(9);
+      await proxyImpl2.changeY(impl2.address);
 
       console.log(Number(await ethers.provider.getStorageAt(impl1.address, "0x0")));
       console.log(Number(await ethers.provider.getStorageAt(impl2.address, "0x0")));
 
-      expect(parseInt(await ethers.provider.getStorageAt(proxy.address, "0x0"))).to.equal(9);
+      expect(await ethers.provider.getStorageAt(proxy.address, "0x0")).to.equal(impl2.address);
     });
   });
 });
